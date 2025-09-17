@@ -1,11 +1,11 @@
-// api/assistant.js - VERSIÓN MEJORADA: Casos como evidencia, no como receta
+// api/assistant.js - VERSIÓN EN CASTELLANO ARGENTINO
 
 export const config = {
  runtime: 'edge',
  maxDuration: 30,
 };
 
-// ============= CASOS DE ÉXITO REALES VENTAPEL - VERSIÓN AMPLIADA =============
+// ============= CASOS DE ÉXITO REALES VENTAPEL =============
 const CASOS_EXITO_REALES = {
  'honda': {
    empresa: 'Honda Argentina',
@@ -91,7 +91,7 @@ const CASOS_EXITO_REALES = {
    }
  },
 
-'correo_argentino': {
+ 'correo_argentino': {
   empresa: 'Correo Argentino',
   sector: 'Logística/Postal',
   problema: 'Robos de celulares en tránsito, departamento de seguridad cuestionaba la cinta gomada por posible violación sin evidencia',
@@ -100,8 +100,8 @@ const CASOS_EXITO_REALES = {
     robos: 'Detección inmediata de violaciones',
     evidencia: '100% trazabilidad de apertura',
     proceso: 'Estandarización completa del cierre',
-    roi_meses: 2, // Estimado típico para seguridad
-    inversion: 180000 // Estimado basado en volumen postal
+    roi_meses: 2,
+    inversion: 180000
   },
   tags: ['logística', 'postal', 'anti-robo', 'celulares', 'alta-seguridad', 'trazabilidad', 'protocolo'],
   metricas_detalle: {
@@ -111,7 +111,7 @@ const CASOS_EXITO_REALES = {
     mejora_proceso: 'Cierre estandarizado permite detección visual inmediata de violación',
     departamento_involucrado: 'Seguridad y prevención de robos'
   },
-  aprendizaje_clave: 'La cinta gomada SIEMPRE deja evidencia de violación. El éxito depende de: 1) Estandarizar el método de cierre, 2) Entrenar al receptor para detectar anomalías, 3) Protocolo de reporte inmediato'
+  aprendizaje_clave: 'La cinta gomada SIEMPRE deja evidencia de violación. El éxito depende de: 1) Estandarizar el método de cierre, 2) Entrenar al receptor para detectar anomalías, 3) Protocolo de reporte inmediato'
 },
  
  'pet_usa': {
@@ -285,11 +285,11 @@ function getScaleValue(scale) {
 function calculateHealthScore(scales) {
  if (!scales) return 0;
  const values = [
-   getScaleValue(scales.dor || scales.pain),
+   getScaleValue(scales.dolor || scales.pain),
    getScaleValue(scales.poder || scales.power),
-   getScaleValue(scales.visao || scales.vision),
+   getScaleValue(scales.vision || scales.vision),
    getScaleValue(scales.valor || scales.value),
-   getScaleValue(scales.controle || scales.control),
+   getScaleValue(scales.control || scales.control),
    getScaleValue(scales.compras || scales.purchase)
  ];
  const sum = values.reduce((acc, val) => acc + val, 0);
@@ -317,10 +317,10 @@ function findRelevantCases(opportunity) {
  if (opportunity.value > 500000) {
    oppTags.push('enterprise', 'alto-volumen');
  }
- if (opportunity.scales?.dor?.description?.includes('robo')) {
+ if (opportunity.scales?.dolor?.description?.includes('robo')) {
    oppTags.push('anti-robo');
  }
- if (opportunity.scales?.dor?.description?.includes('ergon')) {
+ if (opportunity.scales?.dolor?.description?.includes('ergon')) {
    oppTags.push('ergonomía');
  }
  
@@ -343,8 +343,8 @@ function findRelevantCases(opportunity) {
    }
    
    // Coincidencia por problema similar
-   if (opportunity.scales?.dor?.description && caso.problema) {
-     const problemWords = opportunity.scales.dor.description.toLowerCase().split(' ');
+   if (opportunity.scales?.dolor?.description && caso.problema) {
+     const problemWords = opportunity.scales.dolor.description.toLowerCase().split(' ');
      const casoWords = caso.problema.toLowerCase().split(' ');
      const matches = problemWords.filter(word => casoWords.includes(word));
      score += matches.length * 0.5;
@@ -464,17 +464,17 @@ function analyzeOpportunity(opportunity) {
  const criticalScales = [];
  const scales = opportunity.scales || {};
  
- const dorScore = getScaleValue(scales.dor || scales.pain);
+ const dolorScore = getScaleValue(scales.dolor || scales.pain);
  const poderScore = getScaleValue(scales.poder || scales.power);
- const visaoScore = getScaleValue(scales.visao || scales.vision);
+ const visionScore = getScaleValue(scales.vision || scales.vision);
  const valorScore = getScaleValue(scales.valor || scales.value);
- const controleScore = getScaleValue(scales.controle || scales.control);
+ const controlScore = getScaleValue(scales.control || scales.control);
  const comprasScore = getScaleValue(scales.compras || scales.purchase);
 
- if (dorScore < 5) {
+ if (dolorScore < 5) {
    criticalScales.push({
-     name: 'DOR',
-     value: dorScore,
+     name: 'DOLOR',
+     value: dolorScore,
      issue: 'Cliente no admite el problema',
      action: 'Aplicar técnica SPIN para elevar dolor'
    });
@@ -487,10 +487,10 @@ function analyzeOpportunity(opportunity) {
      action: 'Identificar y acceder al Power Sponsor'
    });
  }
- if (visaoScore < 4) {
+ if (visionScore < 4) {
    criticalScales.push({
-     name: 'VISÃO',
-     value: visaoScore,
+     name: 'VISIÓN',
+     value: visionScore,
      issue: 'Cliente no ve la solución',
      action: 'Demo con caso de éxito relevante'
    });
@@ -510,11 +510,11 @@ function analyzeOpportunity(opportunity) {
    daysSince,
    criticalScales,
    scaleBreakdown: {
-     dor: dorScore,
+     dolor: dolorScore,
      poder: poderScore,
-     visao: visaoScore,
+     vision: visionScore,
      valor: valorScore,
-     controle: controleScore,
+     control: controlScore,
      compras: comprasScore
    }
  };
@@ -558,27 +558,27 @@ function generateAlerts(opportunity, pipelineContext) {
    alerts.push({
      type: 'critical',
      priority: 1,
-     message: `💣 R$ ${opportunity.value.toLocaleString('pt-BR')} EN RIESGO CRÍTICO (Health: ${healthScore}/10)`,
+     message: `💣 $ ${opportunity.value.toLocaleString('es-AR')} EN RIESGO CRÍTICO (Salud: ${healthScore}/10)`,
      action: 'Reunión de emergencia con decisor o escalar a CEO'
    });
  } else if (healthScore < 5 && opportunity.value > 50000) {
    alerts.push({
      type: 'urgent',
      priority: 2,
-     message: `⚠️ Deal de R$ ${opportunity.value.toLocaleString('pt-BR')} necesita intervención`,
+     message: `⚠️ Deal de $ ${opportunity.value.toLocaleString('es-AR')} necesita intervención`,
      action: 'Plan de recuperación en 48h'
    });
  }
 
  // Alerta por inconsistencia PPVVCC
- const dorScore = getScaleValue(scales.dor || scales.pain);
+ const dolorScore = getScaleValue(scales.dolor || scales.pain);
  const poderScore = getScaleValue(scales.poder || scales.power);
  
- if (opportunity.stage >= 3 && dorScore < 5) {
+ if (opportunity.stage >= 3 && dolorScore < 5) {
    alerts.push({
      type: 'warning',
      priority: 2,
-     message: `⛔ FRENO: En etapa '${opportunity.stage}' sin DOLOR confirmado (${dorScore}/10)`,
+     message: `⛔ FRENO: En etapa '${opportunity.stage}' sin DOLOR confirmado (${dolorScore}/10)`,
      action: 'Volver a Cualificación - No avanzar sin dolor'
    });
  }
@@ -614,11 +614,11 @@ function generateNextBestAction(opportunity, pipelineContext) {
  const healthScore = parseFloat(calculateHealthScore(opportunity.scales));
  const scales = opportunity.scales || {};
  
- const dorScore = getScaleValue(scales.dor || scales.pain);
+ const dolorScore = getScaleValue(scales.dolor || scales.pain);
  const poderScore = getScaleValue(scales.poder || scales.power);
- const visaoScore = getScaleValue(scales.visao || scales.vision);
+ const visionScore = getScaleValue(scales.vision || scales.vision);
  const valorScore = getScaleValue(scales.valor || scales.value);
- const controleScore = getScaleValue(scales.controle || scales.control);
+ const controlScore = getScaleValue(scales.control || scales.control);
 
  // Prioridad 1: Deals muertos
  if (daysSince > 30) {
@@ -639,13 +639,13 @@ function generateNextBestAction(opportunity, pipelineContext) {
      title: `🔴 ${daysSince} días sin contacto - Reactivar YA`,
      action: 'Email + Llamada en 2 horas',
      strategy: 'Usar competencia o pérdida como trigger',
-     script: `ASUNTO: "${opportunity.client} - ¿Siguen perdiendo R$ ${Math.round(opportunity.value * 0.15).toLocaleString('pt-BR')}/mes?"\n\nCONTENIDO: "Vi que ${opportunity.competitor || 'su competidor'} ya implementó nuestra solución. ¿Vale 15 minutos para ver los resultados?"`,
+     script: `ASUNTO: "${opportunity.client} - ¿Siguen perdiendo $ ${Math.round(opportunity.value * 0.15).toLocaleString('es-AR')}/mes?"\n\nCONTENIDO: "Vi que ${opportunity.competitor || 'su competidor'} ya implementó nuestra solución. ¿Vale 15 minutos para ver los resultados?"`,
      expectedOutcome: 'Reunión agendada en 48h'
    };
  }
 
  // Prioridad 3: Sin dolor admitido
- if (dorScore < 5) {
+ if (dolorScore < 5) {
    return {
      priority: 'ALTA',
      title: '🎯 Sin DOLOR = Sin venta',
@@ -660,22 +660,22 @@ function generateNextBestAction(opportunity, pipelineContext) {
  if (poderScore < 4) {
    return {
      priority: 'ALTA',
-     title: '👔 Necesitas el DECISOR',
+     title: '👔 Necesitás el DECISOR',
      action: 'Escalar esta semana',
      strategy: 'Hacer que el contacto sea el héroe',
-     script: `"${opportunity.sponsor}, para garantizar el ROI de R$ ${Math.round(opportunity.value * 2.5).toLocaleString('pt-BR')}/año, necesito que me ayudes a preparar los números para tu jefe. ¿Lo presentamos juntos?"`,
+     script: `"${opportunity.sponsor}, para garantizar el ROI de $ ${Math.round(opportunity.value * 2.5).toLocaleString('es-AR')}/año, necesito que me ayudes a preparar los números para tu jefe. ¿Lo presentamos juntos?"`,
      expectedOutcome: 'Reunión con decisor en 7 días'
    };
  }
 
  // Prioridad 5: Sin visión clara
- if (visaoScore < 5) {
+ if (visionScore < 5) {
    return {
      priority: 'MEDIA',
      title: '👁️ Construir VISIÓN de solución',
      action: 'Demo personalizada',
      strategy: 'Mostrar el futuro sin problemas actuales',
-     script: `"Imagina tu operación sin cajas abiertas, sin reclamos, con 30% menos tiempo de cerrado. Te muestro exactamente cómo lograrlo con tu volumen específico."`,
+     script: `"Imaginá tu operación sin cajas abiertas, sin reclamos, con 30% menos tiempo de cerrado. Te muestro exactamente cómo lograrlo con tu volumen específico."`,
      expectedOutcome: 'Visión clara y diferenciada'
    };
  }
@@ -687,13 +687,13 @@ function generateNextBestAction(opportunity, pipelineContext) {
      title: '💰 Demostrar ROI concreto',
      action: 'Presentar business case',
      strategy: 'Números específicos del cliente',
-     script: `"Preparé un análisis específico para ${opportunity.client}: inversión de R$ ${Math.round(opportunity.value * 0.5).toLocaleString('pt-BR')}, ahorro anual de R$ ${Math.round(opportunity.value * 1.8).toLocaleString('pt-BR')}. ¿Lo revisamos juntos?"`,
+     script: `"Preparé un análisis específico para ${opportunity.client}: inversión de $ ${Math.round(opportunity.value * 0.5).toLocaleString('es-AR')}, ahorro anual de $ ${Math.round(opportunity.value * 1.8).toLocaleString('es-AR')}. ¿Lo revisamos juntos?"`,
      expectedOutcome: 'ROI validado y aceptado'
    };
  }
 
  // Prioridad 7: Listo para cerrar
- if (dorScore >= 7 && poderScore >= 6 && valorScore >= 6 && controleScore >= 6) {
+ if (dolorScore >= 7 && poderScore >= 6 && valorScore >= 6 && controlScore >= 6) {
    return {
      priority: 'OPORTUNIDAD',
      title: '🏆 CERRAR ESTA SEMANA',
@@ -722,7 +722,7 @@ function generateQuickActions(opportunity, alerts) {
      {
        icon: '📊',
        label: 'Ver pipeline completo',
-       prompt: 'Muéstrame un análisis del pipeline completo con oportunidades en riesgo',
+       prompt: 'Mostrame un análisis del pipeline completo con oportunidades en riesgo',
        color: 'bg-blue-500'
      },
      {
@@ -736,13 +736,13 @@ function generateQuickActions(opportunity, alerts) {
 
  const actions = [];
  const scales = opportunity.scales || {};
- const dorScore = getScaleValue(scales.dor || scales.pain);
+ const dolorScore = getScaleValue(scales.dolor || scales.pain);
  const poderScore = getScaleValue(scales.poder || scales.power);
  const valorScore = getScaleValue(scales.valor || scales.value);
  const comprasScore = getScaleValue(scales.compras || scales.purchase);
 
  // Acciones basadas en escalas bajas
- if (dorScore < 5) {
+ if (dolorScore < 5) {
    actions.push({
      icon: '🎯',
      label: 'Elevar dolor',
@@ -764,14 +764,14 @@ function generateQuickActions(opportunity, alerts) {
    actions.push({
      icon: '💰',
      label: 'Calcular ROI',
-     prompt: `Calcula el ROI específico para ${opportunity.client} con volumen de ${Math.round(opportunity.value/100)} cajas/mes`,
+     prompt: `Calculá el ROI específico para ${opportunity.client} con volumen de ${Math.round(opportunity.value/100)} cajas/mes`,
      color: 'bg-green-500'
    });
  }
 
  if (comprasScore < 4) {
    actions.push({
-     icon: '📝',
+     icon: '🔐',
      label: 'Navegar compras',
      prompt: `${opportunity.client} tiene proceso de compras complejo. Dame estrategia para evitar compulsa y acelerar aprobación`,
      color: 'bg-yellow-500'
@@ -784,14 +784,14 @@ function generateQuickActions(opportunity, alerts) {
      actions.push({
        icon: '🚨',
        label: 'Plan de rescate',
-       prompt: `${opportunity.client} está en riesgo crítico. Dame un plan de rescate de emergencia para salvar este deal de R$ ${opportunity.value.toLocaleString('pt-BR')}`,
+       prompt: `${opportunity.client} está en riesgo crítico. Dame un plan de rescate de emergencia para salvar este deal de $ ${opportunity.value.toLocaleString('es-AR')}`,
        color: 'bg-red-600'
      });
    } else if (alerts[0].type === 'urgent') {
      actions.push({
        icon: '📧',
        label: 'Email reactivación',
-       prompt: `Escribe un email potente para reactivar a ${opportunity.client} después de ${getDaysSinceLastContact(opportunity.last_update)} días sin contacto`,
+       prompt: `Escribí un email potente para reactivar a ${opportunity.client} después de ${getDaysSinceLastContact(opportunity.last_update)} días sin contacto`,
        color: 'bg-orange-500'
      });
    }
@@ -835,8 +835,8 @@ async function searchGoogleForContext(query) {
      },
      body: JSON.stringify({
        q: query,
-       gl: 'br',
-       hl: 'pt',
+       gl: 'ar',
+       hl: 'es',
        num: 5,
        type: 'search'
      })
@@ -883,7 +883,7 @@ function buildCompleteAnalysis(opportunityData, pipelineData, vendorName) {
    if (analysis.pipeline.atRisk > 0) {
      analysis.insights.push({
        type: 'warning',
-       message: `📊 ${analysis.pipeline.atRisk} oportunidades en riesgo por R$ ${analysis.pipeline.riskValue.toLocaleString('pt-BR')}`
+       message: `📊 ${analysis.pipeline.atRisk} oportunidades en riesgo por $ ${analysis.pipeline.riskValue.toLocaleString('es-AR')}`
      });
    }
    
@@ -940,7 +940,7 @@ function buildCompleteAnalysis(opportunityData, pipelineData, vendorName) {
  return analysis;
 }
 
-// ============= LLAMADA A CLAUDE API MEJORADA - CASOS COMO EVIDENCIA =============
+// ============= LLAMADA A CLAUDE API - CASOS COMO EVIDENCIA =============
 async function callClaudeAPI(opportunityData, userInput, ventapelContext, toolsAvailable, webSearchResults = null, completeAnalysis = null) {
  const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY;
  
@@ -963,7 +963,7 @@ async function callClaudeAPI(opportunityData, userInput, ventapelContext, toolsA
      }))
    : [];
 
- const promptTemplate = `Eres "Ventus", un coach de ventas experto en metodología PPVVCC de Ventapel Brasil.
+ const promptTemplate = `Sos "Ventus", un coach de ventas experto en metodología PPVVCC de Ventapel.
 Tu CEO te describió como: "directo, sin vueltas, basado en evidencia y lógica". NO uses adulación ni frases motivacionales vacías.
 
 **ESTRUCTURA OBLIGATORIA DE TUS RESPUESTAS:**
@@ -971,22 +971,22 @@ Tu CEO te describió como: "directo, sin vueltas, basado en evidencia y lógica"
 1. **DIAGNÓSTICO** - Qué está pasando realmente (análisis de la situación)
 2. **ESTRATEGIA** - Por qué es importante actuar (el principio detrás)
 3. **TÁCTICA** - Qué hacer específicamente (acciones concretas)
-4. **EVIDENCIA** - Solo si aplica, menciona UN caso relevante como prueba (opcional)
+4. **EVIDENCIA** - Solo si aplica, mencioná UN caso relevante como prueba (opcional)
 
 **REGLAS CRÍTICAS:**
 - NUNCA empieces con "En el caso de X empresa..." 
-- PRIMERO explica QUÉ hacer y POR QUÉ
+- PRIMERO explicá QUÉ hacer y POR QUÉ
 - Los casos son EVIDENCIA OPCIONAL al final, no el punto de partida
-- Si mencionas un caso, que sea para reforzar credibilidad, no como receta
-- Personaliza TODO al contexto específico del cliente actual
+- Si mencionás un caso, que sea para reforzar credibilidad, no como receta
+- Personalizá TODO al contexto específico del cliente actual
 
 ---
 **CONTEXTO ACTUAL:**
 
 Cliente: ${opportunityData?.client || 'No seleccionado'}
 Industria: ${opportunityData?.industry || 'No especificada'}
-Valor deal: R$ ${opportunityData?.value?.toLocaleString('pt-BR') || '0'}
-Stage: ${opportunityData?.stage || 0}/6
+Valor deal: $ ${opportunityData?.value?.toLocaleString('es-AR') || '0'}
+Etapa: ${opportunityData?.stage || 0}/6
 
 **ANÁLISIS PPVVCC:**
 ${completeAnalysis?.opportunity ? `
@@ -994,11 +994,11 @@ ${completeAnalysis?.opportunity ? `
 - Probabilidad: ${completeAnalysis.opportunity.probability}%
 - Días sin contacto: ${completeAnalysis.opportunity.daysSince}
 - Escalas:
-  • DOR: ${completeAnalysis.opportunity.scaleBreakdown.dor}/10
+  • DOLOR: ${completeAnalysis.opportunity.scaleBreakdown.dolor}/10
   • PODER: ${completeAnalysis.opportunity.scaleBreakdown.poder}/10
-  • VISÃO: ${completeAnalysis.opportunity.scaleBreakdown.visao}/10
+  • VISIÓN: ${completeAnalysis.opportunity.scaleBreakdown.vision}/10
   • VALOR: ${completeAnalysis.opportunity.scaleBreakdown.valor}/10
-  • CONTROLE: ${completeAnalysis.opportunity.scaleBreakdown.controle}/10
+  • CONTROL: ${completeAnalysis.opportunity.scaleBreakdown.control}/10
   • COMPRAS: ${completeAnalysis.opportunity.scaleBreakdown.compras}/10
 ` : 'No disponible'}
 
@@ -1021,10 +1021,10 @@ ${relevantCasesForReference.length > 0 ? JSON.stringify(relevantCasesForReferenc
 
 ---
 **INSTRUCCIONES FINALES:**
-1. Responde DIRECTAMENTE a la pregunta
+1. Respondé DIRECTAMENTE a la pregunta
 2. Estructura: Diagnóstico → Estrategia → Táctica → Evidencia (si aplica)
-3. Termina SIEMPRE con UNA acción específica para HOY
-4. Si mencionas un caso, que sea breve y al final: "Esto funcionó con [empresa] que logró [resultado]"
+3. Terminá SIEMPRE con UNA acción específica para HOY
+4. Si mencionás un caso, que sea breve y al final: "Esto funcionó con [empresa] que logró [resultado]"
 5. Máximo 300 palabras total
 6. Sin sermones, sin motivación barata, solo estrategia pura`;
 
@@ -1047,7 +1047,7 @@ ${relevantCasesForReference.length > 0 ? JSON.stringify(relevantCasesForReferenc
    });
 
    if (!response.ok) {
-     console.log('❌ Error en Claude API:', response.status);
+     console.log('⌐ Error en Claude API:', response.status);
      return { type: 'fallback', content: generateSmartFallback(opportunityData, userInput, completeAnalysis) };
    }
 
@@ -1057,7 +1057,7 @@ ${relevantCasesForReference.length > 0 ? JSON.stringify(relevantCasesForReferenc
    return { type: 'direct_response', content: responseText };
    
  } catch (error) {
-   console.error('❌ Error llamando a Claude:', error);
+   console.error('⌐ Error llamando a Claude:', error);
    return { type: 'fallback', content: generateSmartFallback(opportunityData, userInput, completeAnalysis) };
  }
 }
@@ -1065,13 +1065,13 @@ ${relevantCasesForReference.length > 0 ? JSON.stringify(relevantCasesForReferenc
 // ============= FALLBACK INTELIGENTE =============
 function generateSmartFallback(opportunityData, userInput, analysis) {
  if (!opportunityData) {
-   return "❌ No hay oportunidad seleccionada. Selecciona un cliente del CRM para comenzar el análisis.";
+   return "⌐ No hay oportunidad seleccionada. Seleccioná un cliente del CRM para comenzar el análisis.";
  }
 
  let response = `📊 **Análisis de ${opportunityData.client}**\n\n`;
  
  if (analysis?.opportunity) {
-   response += `**Estado:** Health ${analysis.opportunity.healthScore}/10 | Probabilidad ${analysis.opportunity.probability}%\n\n`;
+   response += `**Estado:** Salud ${analysis.opportunity.healthScore}/10 | Probabilidad ${analysis.opportunity.probability}%\n\n`;
  }
  
  if (analysis?.alerts?.length > 0) {
@@ -1148,7 +1148,7 @@ export default async function handler(req) {
    if (!opportunityData && !isNewOpportunity && !pipelineData?.allOpportunities?.length) {
      return new Response(
        JSON.stringify({ 
-         response: "❌ **No hay datos disponibles**\n\nSelecciona un cliente del CRM o crea una nueva oportunidad.",
+         response: "⌐ **No hay datos disponibles**\n\nSeleccioná un cliente del CRM o creá una nueva oportunidad.",
          analysis: completeAnalysis
        }),
        { status: 200, headers }
@@ -1162,9 +1162,9 @@ export default async function handler(req) {
      if (completeAnalysis.pipeline) {
        summaryResponse = `📊 **Resumen del Pipeline**\n\n`;
        summaryResponse += `• Total: ${completeAnalysis.pipeline.total} oportunidades\n`;
-       summaryResponse += `• Valor: R$ ${completeAnalysis.pipeline.totalValue.toLocaleString('pt-BR')}\n`;
+       summaryResponse += `• Valor: $ ${completeAnalysis.pipeline.totalValue.toLocaleString('es-AR')}\n`;
        summaryResponse += `• En riesgo: ${completeAnalysis.pipeline.atRisk} deals\n`;
-       summaryResponse += `• Health promedio: ${completeAnalysis.pipeline.averageHealth}/10\n`;
+       summaryResponse += `• Salud promedio: ${completeAnalysis.pipeline.averageHealth}/10\n`;
      }
      
      if (opportunityData && completeAnalysis.nextBestAction) {
@@ -1191,7 +1191,7 @@ export default async function handler(req) {
    if (needsWebSearch && opportunityData?.client) {
      console.log('🔍 Buscando en Google para:', opportunityData.client);
      webSearchResults = await searchGoogleForContext(
-       `${opportunityData.client} Brasil ${opportunityData.industry || ''} noticias 2024 2025`
+       `${opportunityData.client} Argentina ${opportunityData.industry || ''} noticias 2024 2025`
      );
    }
 
@@ -1252,11 +1252,11 @@ export default async function handler(req) {
    );
 
  } catch (error) {
-   console.error('❌ Error en backend:', error);
+   console.error('⌐ Error en backend:', error);
    
    return new Response(
      JSON.stringify({ 
-       response: '❌ **Error procesando solicitud**\n\nPor favor, intenta de nuevo.',
+       response: '⌐ **Error procesando solicitud**\n\nPor favor, intentá de nuevo.',
        error: error.message,
        analysis: null
      }),
