@@ -36,7 +36,7 @@ const AnalysisPanel = ({ analysis }) => {
               <div className={`text-lg font-bold ${getHealthColor(opportunity.healthScore)}`}>
                 {opportunity.healthScore}/10
               </div>
-              <div className="text-xs text-gray-500">Health</div>
+              <div className="text-xs text-gray-500">Salud</div>
             </div>
             <div className="bg-white rounded-lg p-2 border border-gray-200">
               <Target className="w-4 h-4 mx-auto mb-1 text-blue-600" />
@@ -57,14 +57,24 @@ const AnalysisPanel = ({ analysis }) => {
           {/* Breakdown de escalas */}
           {opportunity.scaleBreakdown && (
             <div className="mt-2 grid grid-cols-6 gap-1">
-              {Object.entries(opportunity.scaleBreakdown).map(([key, value]) => (
-                <div key={key} className="text-center">
-                  <div className="text-xs font-medium text-gray-600 uppercase">{key.slice(0, 3)}</div>
-                  <div className={`text-sm font-bold ${value >= 7 ? 'text-green-600' : value >= 4 ? 'text-yellow-600' : 'text-red-600'}`}>
-                    {value}
+              {Object.entries(opportunity.scaleBreakdown).map(([key, value]) => {
+                const labels = {
+                  dolor: 'DOL',
+                  poder: 'POD', 
+                  vision: 'VIS',
+                  valor: 'VAL',
+                  control: 'CTL',
+                  compras: 'COM'
+                };
+                return (
+                  <div key={key} className="text-center">
+                    <div className="text-xs font-medium text-gray-600 uppercase">{labels[key] || key.slice(0, 3)}</div>
+                    <div className={`text-sm font-bold ${value >= 7 ? 'text-green-600' : value >= 4 ? 'text-yellow-600' : 'text-red-600'}`}>
+                      {value}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
@@ -118,13 +128,13 @@ const AnalysisPanel = ({ analysis }) => {
             </div>
             <div className="bg-white rounded-lg p-2 border border-gray-200">
               <DollarSign className="w-4 h-4 text-green-600 mb-1" />
-              <div className="text-sm font-bold">R$ {(pipeline.totalValue / 1000000).toFixed(1)}M</div>
+              <div className="text-sm font-bold">$ {(pipeline.totalValue / 1000000).toFixed(1)}M</div>
               <div className="text-xs text-gray-500">Pipeline Total</div>
             </div>
           </div>
           {pipeline.atRisk > 0 && (
             <div className="mt-2 text-xs bg-red-50 text-red-700 p-2 rounded-lg">
-              ⚠️ {pipeline.atRisk} deals en riesgo (R$ {(pipeline.riskValue / 1000).toFixed(0)}k)
+              ⚠️ {pipeline.atRisk} deals en riesgo ($ {(pipeline.riskValue / 1000).toFixed(0)}k)
             </div>
           )}
         </div>
@@ -279,7 +289,7 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
       console.error('Error:', error);
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: '❌ Error de conexión. Intenta de nuevo.',
+        content: '⌐ Error de conexión. Intentá de nuevo.',
         timestamp: new Date().toISOString()
       }]);
     } finally {
@@ -292,19 +302,19 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
     {
       icon: '🎯',
       label: 'Dolor',
-      prompt: 'Genera una estrategia SPIN para elevar el dolor del cliente',
+      prompt: 'Generá una estrategia SPIN para elevar el dolor del cliente',
       color: 'bg-red-500'
     },
     {
       icon: '💰',
       label: 'ROI',
-      prompt: 'Calcula el ROI específico para esta oportunidad',
+      prompt: 'Calculá el ROI específico para esta oportunidad',
       color: 'bg-green-500'
     },
     {
       icon: '📧',
       label: 'Email',
-      prompt: 'Escribe un email de seguimiento potente',
+      prompt: 'Escribí un email de seguimiento potente',
       color: 'bg-blue-500'
     },
     {
@@ -316,7 +326,7 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
     {
       icon: '📈',
       label: 'Estrategia',
-      prompt: 'Crea un plan de acción para los próximos 5 días',
+      prompt: 'Creá un plan de acción para los próximos 5 días',
       color: 'bg-indigo-500'
     },
     {
@@ -338,10 +348,10 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
     if (!currentOpportunity?.scales) return [];
     
     const suggestions = [];
-    const dorScore = currentOpportunity.scales?.dor?.score || 0;
+    const dolorScore = currentOpportunity.scales?.dolor?.score || 0;
     const poderScore = currentOpportunity.scales?.poder?.score || 0;
     
-    if (dorScore < 5) {
+    if (dolorScore < 5) {
       suggestions.push("🎯 ¿Cómo puedo hacer que el cliente admita su dolor?");
     }
     if (poderScore < 5) {
@@ -403,9 +413,9 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
             {currentOpportunity && (
               <div className="mt-2 bg-white/20 rounded-lg px-3 py-2">
                 <div className="flex justify-between items-center text-xs">
-                  <span>Stage: {currentOpportunity.stage}/6</span>
+                  <span>Etapa: {currentOpportunity.stage}/6</span>
                   <span>Prob: {currentOpportunity.probability || 0}%</span>
-                  <span>R$ {(currentOpportunity.value || 0).toLocaleString('pt-BR')}</span>
+                  <span>$ {(currentOpportunity.value || 0).toLocaleString('es-AR')}</span>
                 </div>
               </div>
             )}
@@ -450,7 +460,7 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
                       <div className="text-xs bg-white rounded-lg p-2 mb-3 border border-purple-200">
                         <span className="font-semibold text-purple-700">Estado actual:</span>
                         <div className="mt-1">
-                          • Health: {analysis.opportunity?.healthScore || 'N/A'}/10<br/>
+                          • Salud: {analysis.opportunity?.healthScore || 'N/A'}/10<br/>
                           • Probabilidad: {analysis.opportunity?.probability || 'N/A'}%<br/>
                           • {analysis.alerts?.length || 0} alertas activas
                         </div>
@@ -476,7 +486,7 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
                 ) : (
                   <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-2">
                     <p className="text-sm text-yellow-800">
-                      ⚠️ <strong>Selecciona un cliente del CRM</strong> para análisis completo
+                      ⚠️ <strong>Seleccioná un cliente del CRM</strong> para análisis completo
                     </p>
                     {pipelineData && (
                       <p className="text-xs text-yellow-700 mt-1">
@@ -506,7 +516,7 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
                   )}
                   <div className="text-base whitespace-pre-wrap leading-relaxed">{msg.content}</div>
                   <div className="text-xs opacity-60 mt-1">
-                    {new Date(msg.timestamp).toLocaleTimeString('pt-BR', { 
+                    {new Date(msg.timestamp).toLocaleTimeString('es-AR', { 
                       hour: '2-digit', 
                       minute: '2-digit' 
                     })}
@@ -543,8 +553,8 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
                   }
                 }}
                 placeholder={currentOpportunity 
-                  ? "Pregúntame sobre estrategias, objeciones, ROI..." 
-                  : "Selecciona un cliente o pregunta sobre el pipeline..."}
+                  ? "Preguntame sobre estrategias, objeciones, ROI..." 
+                  : "Seleccioná un cliente o preguntá sobre el pipeline..."}
                 className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-base disabled:bg-gray-100"
                 disabled={isLoading}
               />
@@ -571,7 +581,7 @@ const AIAssistant = ({ currentOpportunity, onOpportunityUpdate, currentUser, sup
                     </span>
                     {analysis && analysis.opportunity && (
                       <span className="text-xs text-gray-400">
-                        | Health {analysis.opportunity.healthScore}/10
+                        | Salud {analysis.opportunity.healthScore}/10
                       </span>
                     )}
                   </>
