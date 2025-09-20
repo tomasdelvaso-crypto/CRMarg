@@ -163,9 +163,9 @@ class SupabaseService {
 
   private getVendorRole(name: string): string {
     const roles: Record<string, string> = {
-      'Tomás': 'CEO/Head of Sales',
-      'Jordi': 'Sales Manager',
-      'Matheus': 'Account Executive'
+      'Tomás': 'CEO/Jefe de Ventas',
+      'Jordi': 'Gerente de Ventas',
+      'Matheus': 'Ejecutivo de Cuentas'
     };
     return roles[name] || 'Vendedor';
   }
@@ -287,84 +287,84 @@ const OpportunityHealthScore: React.FC<{ opportunity: Opportunity }> = ({ opport
 const stages: StageRequirement[] = [
   { 
     id: 1, 
-    name: 'Prospecção', 
+    name: 'Prospección', 
     probability: 0, 
     color: 'bg-gray-500',
-    requirements: ['Identificar dor do cliente', 'Contato inicial estabelecido'],
+    requirements: ['Identificar dolor del cliente', 'Contacto inicial establecido'],
     checklist: {
-      'Identificou a empresa potencial': 'empresa_identificada',
-      'Pesquisou sobre o negócio do cliente': 'pesquisa_negocio',
-      'Identificou pessoa de contato': 'contato_identificado',
-      'Realizou primeiro contato': 'primeiro_contato'
+      'Identificó la empresa potencial': 'empresa_identificada',
+      'Investigó sobre el negocio del cliente': 'pesquisa_negocio',
+      'Identificó persona de contacto': 'contato_identificado',
+      'Realizó primer contacto': 'primeiro_contato'
     }
   },
   { 
     id: 2, 
-    name: 'Qualificação', 
+    name: 'Calificación', 
     probability: 20, 
     color: 'bg-blue-500',
-    requirements: ['Score DOR ≥ 5', 'Score PODER ≥ 4', 'Budget confirmado'],
+    requirements: ['Score DOLOR ≥ 5', 'Score PODER ≥ 4', 'Budget confirmado'],
     checklist: {
-      'Cliente admite ter problema/dor (DOR ≥ 5)': 'dor_admitida',
-      'Identificou tomador de decisão (PODER ≥ 4)': 'decisor_identificado',
-      'Budget disponível confirmado': 'budget_confirmado',
-      'Timeline do projeto definida': 'timeline_definida',
-      'Critérios de decisão entendidos': 'criterios_entendidos'
+      'Cliente admite tener problema/dolor (DOLOR ≥ 5)': 'dor_admitida',
+      'Identificó tomador de decisión (PODER ≥ 4)': 'decisor_identificado',
+      'Budget disponible confirmado': 'budget_confirmado',
+      'Timeline del proyecto definida': 'timeline_definida',
+      'Criterios de decisión entendidos': 'criterios_entendidos'
     }
   },
   { 
     id: 3, 
-    name: 'Apresentação', 
+    name: 'Presentación', 
     probability: 40, 
     color: 'bg-yellow-500',
-    requirements: ['Score VISÃO ≥ 5', 'Apresentação agendada', 'Stakeholders definidos'],
+    requirements: ['Score VISIÓN ≥ 5', 'Presentación agendada', 'Stakeholders definidos'],
     checklist: {
-      'Visão de solução criada (VISÃO ≥ 5)': 'visao_criada',
-      'Demo/Apresentação realizada': 'demo_realizada',
+      'Visión de solución creada (VISIÓN ≥ 5)': 'visao_criada',
+      'Demo/Presentación realizada': 'demo_realizada',
       'Todos stakeholders presentes': 'stakeholders_presentes',
-      'Objeções principais identificadas': 'objecoes_identificadas',
-      'Próximos passos acordados': 'proximos_passos'
+      'Objeciones principales identificadas': 'objecoes_identificadas',
+      'Próximos pasos acordados': 'proximos_passos'
     }
   },
   { 
     id: 4, 
-    name: 'Validação/Teste', 
+    name: 'Validación/Prueba', 
     probability: 75, 
     color: 'bg-orange-500',
-    requirements: ['Score VALOR ≥ 6', 'Teste/POC executado', 'ROI validado'],
+    requirements: ['Score VALOR ≥ 6', 'Prueba/POC ejecutado', 'ROI validado'],
     checklist: {
-      'POC/Teste iniciado': 'poc_iniciado',
-      'Critérios de sucesso definidos': 'criterios_sucesso',
-      'ROI calculado e validado (VALOR ≥ 6)': 'roi_validado',
+      'POC/Prueba iniciado': 'poc_iniciado',
+      'Criterios de éxito definidos': 'criterios_sucesso',
+      'ROI calculado y validado (VALOR ≥ 6)': 'roi_validado',
       'Resultados documentados': 'resultados_documentados',
-      'Aprovação técnica obtida': 'aprovacao_tecnica'
+      'Aprobación técnica obtenida': 'aprovacao_tecnica'
     }
   },
   { 
     id: 5, 
-    name: 'Negociação', 
+    name: 'Negociación', 
     probability: 90, 
     color: 'bg-green-500',
-    requirements: ['Score CONTROLE ≥ 7', 'Score COMPRAS ≥ 6', 'Proposta enviada'],
+    requirements: ['Score CONTROL ≥ 7', 'Score COMPRAS ≥ 6', 'Propuesta enviada'],
     checklist: {
-      'Proposta comercial enviada': 'proposta_enviada',
-      'Termos negociados (COMPRAS ≥ 6)': 'termos_negociados',
-      'Controle do processo (CONTROLE ≥ 7)': 'controle_processo',
-      'Aprovação verbal recebida': 'aprovacao_verbal',
-      'Contrato em revisão legal': 'revisao_legal'
+      'Propuesta comercial enviada': 'proposta_enviada',
+      'Términos negociados (COMPRAS ≥ 6)': 'termos_negociados',
+      'Control del proceso (CONTROL ≥ 7)': 'controle_processo',
+      'Aprobación verbal recibida': 'aprovacao_verbal',
+      'Contrato en revisión legal': 'revisao_legal'
     }
   },
   { 
     id: 6, 
-    name: 'Fechado', 
+    name: 'Cerrado', 
     probability: 100, 
     color: 'bg-emerald-600',
-    requirements: ['Contrato assinado', 'Pagamento processado'],
+    requirements: ['Contrato firmado', 'Pago procesado'],
     checklist: {
-      'Contrato assinado': 'contrato_assinado',
+      'Contrato firmado': 'contrato_assinado',
       'Pedido de compra emitido': 'pedido_compra',
       'Kickoff agendado': 'kickoff_agendado',
-      'Pagamento processado': 'pagamento_processado'
+      'Pago procesado': 'pagamento_processado'
     }
   }
 ];
@@ -372,174 +372,174 @@ const stages: StageRequirement[] = [
 const scales = [
   { 
     id: 'dor', 
-    name: 'DOR', 
+    name: 'DOLOR', 
     icon: AlertCircle, 
-    description: 'Dor identificada e admitida', 
+    description: 'Dolor identificado y admitido', 
     color: 'text-red-600', 
     bgColor: 'bg-red-50', 
     borderColor: 'border-red-200',
     questions: [
-      'Cliente admite ter o problema?',
-      'Problema está custando dinheiro?', 
-      'Consequências são mensuráveis?',
-      'Urgência para resolver?'
+      '¿Cliente admite tener el problema?',
+      '¿El problema está costando dinero?', 
+      '¿Las consecuencias son mensurables?',
+      '¿Urgencia para resolver?'
     ]
   },
   { 
     id: 'poder', 
     name: 'PODER', 
     icon: User, 
-    description: 'Acesso ao decisor', 
+    description: 'Acceso al decisor', 
     color: 'text-blue-600', 
     bgColor: 'bg-blue-50', 
     borderColor: 'border-blue-200',
     questions: [
-      'Conhece o decisor final?',
-      'Tem acesso direto ao decisor?',
-      'Decisor participa das reuniões?',
-      'Processo de decisão mapeado?'
+      '¿Conoce al decisor final?',
+      '¿Tiene acceso directo al decisor?',
+      '¿Decisor participa de las reuniones?',
+      '¿Proceso de decisión mapeado?'
     ]
   },
   { 
     id: 'visao', 
-    name: 'VISÃO', 
+    name: 'VISIÓN', 
     icon: Eye, 
-    description: 'Visão de solução construída', 
+    description: 'Visión de solución construida', 
     color: 'text-purple-600', 
     bgColor: 'bg-purple-50', 
     borderColor: 'border-purple-200',
     questions: [
-      'Cliente vê valor na solução?',
-      'Benefícios estão claros?',
-      'Solução resolve a dor?',
-      'Cliente consegue visualizar implementação?'
+      '¿Cliente ve valor en la solución?',
+      '¿Los beneficios están claros?',
+      '¿La solución resuelve el dolor?',
+      '¿Cliente puede visualizar implementación?'
     ]
   },
   { 
     id: 'valor', 
     name: 'VALOR', 
     icon: DollarSign, 
-    description: 'ROI/Benefícios validados', 
+    description: 'ROI/Beneficios validados', 
     color: 'text-green-600', 
     bgColor: 'bg-green-50', 
     borderColor: 'border-green-200',
     questions: [
-      'ROI foi calculado?',
-      'Cliente concorda com ROI?',
-      'Valor justifica investimento?',
-      'Benefícios são mensuráveis?'
+      '¿ROI fue calculado?',
+      '¿Cliente concuerda con ROI?',
+      '¿Valor justifica inversión?',
+      '¿Los beneficios son mensurables?'
     ]
   },
   { 
     id: 'controle', 
-    name: 'CONTROLE', 
+    name: 'CONTROL', 
     icon: Target, 
-    description: 'Controle do processo', 
+    description: 'Control del proceso', 
     color: 'text-orange-600', 
     bgColor: 'bg-orange-50', 
     borderColor: 'border-orange-200',
     questions: [
-      'Você conduz o processo?',
-      'Próximos passos definidos?',
-      'Timeline acordada?',
-      'Competidores identificados?'
+      '¿Usted conduce el proceso?',
+      '¿Próximos pasos definidos?',
+      '¿Timeline acordada?',
+      '¿Competidores identificados?'
     ]
   },
   { 
     id: 'compras', 
     name: 'COMPRAS', 
-    description: 'Processo de compras', 
+    description: 'Proceso de compras', 
     icon: ShoppingCart, 
     color: 'text-indigo-600', 
     bgColor: 'bg-indigo-50', 
     borderColor: 'border-indigo-200',
     questions: [
-      'Processo de compras mapeado?',
-      'Budget aprovado?',
-      'Procurement envolvido?',
-      'Documentação necessária conhecida?'
+      '¿Proceso de compras mapeado?',
+      '¿Budget aprobado?',
+      '¿Procurement involucrado?',
+      '¿Documentación necesaria conocida?'
     ]
   }
 ];
 
 const scaleDefinitions = {
   dor: [
-    { level: 0, text: "Não há identificação de necessidade ou dor pelo cliente" },
-    { level: 1, text: "Vendedor assume necessidades do cliente" },
-    { level: 2, text: "Pessoa de Contato admite necessidade" },
-    { level: 3, text: "Pessoa de Contato admite razões e sintomas causadores de dor" },
-    { level: 4, text: "Pessoa de Contato admite dor" },
-    { level: 5, text: "Vendedor documenta dor e Pessoa de Contato concorda" },
-    { level: 6, text: "Pessoa de Contato e outros necessidades do Tomador de Decisão" },
-    { level: 7, text: "Tomador de Decisão admite necessidades" },
-    { level: 8, text: "Tomador de Decisão admite razões e sintomas causadores de dor" },
-    { level: 9, text: "Tomador de Decisão admite dor" },
-    { level: 10, text: "Vendedor documenta dor e Power concorda" }
+    { level: 0, text: "No hay identificación de necesidad o dolor por el cliente" },
+    { level: 1, text: "Vendedor asume necesidades del cliente" },
+    { level: 2, text: "Persona de Contacto admite necesidad" },
+    { level: 3, text: "Persona de Contacto admite razones y síntomas causadores de dolor" },
+    { level: 4, text: "Persona de Contacto admite dolor" },
+    { level: 5, text: "Vendedor documenta dolor y Persona de Contacto concuerda" },
+    { level: 6, text: "Persona de Contacto formaliza necesidades del Tomador de Decisión" },
+    { level: 7, text: "Tomador de Decisión admite necesidades" },
+    { level: 8, text: "Tomador de Decisión admite razones y síntomas causadores de dolor" },
+    { level: 9, text: "Tomador de Decisión admite dolor" },
+    { level: 10, text: "Vendedor documenta dolor y Power concuerda" }
   ],
   poder: [
-    { level: 0, text: "Tomador de Decisão não foi identificado ainda" },
-    { level: 1, text: "Processo de decisão revelado por Pessoa de Contato" },
-    { level: 2, text: "Tomador de Decisão Potencial identificado" },
-    { level: 3, text: "Pedido de acesso a Tomador de Decisão concedido por Pessoa de Contato" },
-    { level: 4, text: "Tomador de Decisão acessado" },
-    { level: 5, text: "Tomador de Decisão concorda em explorar oportunidade" },
-    { level: 6, text: "Processo de decisão e compra confirmado pelo Tomador de Decisão" },
-    { level: 7, text: "Tomador de Decisão concorda em fazer uma Prova de Valor" },
-    { level: 8, text: "Tomador de Decisão concorda com conteúdo da proposta" },
-    { level: 9, text: "Tomador de Decisão confirma aprovação verbal" },
-    { level: 10, text: "Tomador de Decisão aprova formalmente internamente" }
+    { level: 0, text: "Tomador de Decisión no fue identificado aún" },
+    { level: 1, text: "Proceso de decisión revelado por Persona de Contacto" },
+    { level: 2, text: "Tomador de Decisión Potencial identificado" },
+    { level: 3, text: "Pedido de acceso a Tomador de Decisión concedido por Persona de Contacto" },
+    { level: 4, text: "Tomador de Decisión accedido" },
+    { level: 5, text: "Tomador de Decisión concuerda en explorar oportunidad" },
+    { level: 6, text: "Proceso de decisión y compra confirmado por el Tomador de Decisión" },
+    { level: 7, text: "Tomador de Decisión concuerda en hacer una Prueba de Valor" },
+    { level: 8, text: "Tomador de Decisión concuerda con contenido de la propuesta" },
+    { level: 9, text: "Tomador de Decisión confirma aprobación verbal" },
+    { level: 10, text: "Tomador de Decisión aprueba formalmente internamente" }
   ],
   visao: [
-    { level: 0, text: "Nenhuma visão ou visão concorrente estabelecida" },
-    { level: 1, text: "Visão do Pessoa de Contato criada em termos de produto" },
-    { level: 2, text: "Visão Pessoa de Contato criada em termos: Situação/Problema/Implicação" },
-    { level: 3, text: "Visão diferenciada criada com Pessoa de Contato (SPI)" },
-    { level: 4, text: "Visão diferenciada documentada com Pessoa de Contato" },
-    { level: 5, text: "Documentação concordada por Pessoa de Contato" },
-    { level: 6, text: "Visão Power criada em termos de produto" },
-    { level: 7, text: "Visão Power criada em termos: Situação/Problema/Implicação" },
-    { level: 8, text: "Visão diferenciada criada com Tomador de Decisão (SPIN)" },
-    { level: 9, text: "Visão diferenciada documentada com Tomador de Decisão" },
-    { level: 10, text: "Documentação concordada por Tomador de Decisão" }
+    { level: 0, text: "Ninguna visión o visión competidora establecida" },
+    { level: 1, text: "Visión de Persona de Contacto creada en términos de producto" },
+    { level: 2, text: "Visión Persona de Contacto creada en términos: Situación/Problema/Implicación" },
+    { level: 3, text: "Visión diferenciada creada con Persona de Contacto (SPI)" },
+    { level: 4, text: "Visión diferenciada documentada con Persona de Contacto" },
+    { level: 5, text: "Documentación acordada por Persona de Contacto" },
+    { level: 6, text: "Visión Power creada en términos de producto" },
+    { level: 7, text: "Visión Power creada en términos: Situación/Problema/Implicación" },
+    { level: 8, text: "Visión diferenciada creada con Tomador de Decisión (SPIN)" },
+    { level: 9, text: "Visión diferenciada documentada con Tomador de Decisión" },
+    { level: 10, text: "Documentación acordada por Tomador de Decisión" }
   ],
   valor: [
-    { level: 0, text: "Pessoa de Contato explora a solução, mas valor não foi identificado" },
-    { level: 1, text: "Vendedor identifica proposição de valor para o negócio" },
-    { level: 2, text: "Pessoa de Contato concorda em explorar a proposta de valor" },
-    { level: 3, text: "Tomador de Decisão concorda em explorar a proposta de valor" },
-    { level: 4, text: "Critérios para definição de valor estabelecidos com Tomador de Decisão" },
-    { level: 5, text: "Valor descoberto conduzido e visão Tomador de Decisão" },
-    { level: 6, text: "Análise de valor conduzida por vendedor (demo)" },
-    { level: 7, text: "Análise de valor conduzida pelo Pessoa de Contato (trial)" },
-    { level: 8, text: "Tomador de Decisão concorda com análise de Valor" },
-    { level: 9, text: "Conclusão da análise de valor documentada pelo vendedor" },
-    { level: 10, text: "Tomador de Decisão confirma por escrito conclusões da análise" }
+    { level: 0, text: "Persona de Contacto explora la solución, pero valor no fue identificado" },
+    { level: 1, text: "Vendedor identifica proposición de valor para el negocio" },
+    { level: 2, text: "Persona de Contacto concuerda en explorar la propuesta de valor" },
+    { level: 3, text: "Tomador de Decisión concuerda en explorar la propuesta de valor" },
+    { level: 4, text: "Criterios para definición de valor establecidos con Tomador de Decisión" },
+    { level: 5, text: "Valor descubierto conducido y visión Tomador de Decisión" },
+    { level: 6, text: "Análisis de valor conducida por vendedor (demo)" },
+    { level: 7, text: "Análisis de valor conducida por Persona de Contacto (trial)" },
+    { level: 8, text: "Tomador de Decisión concuerda con análisis de Valor" },
+    { level: 9, text: "Conclusión del análisis de valor documentada por el vendedor" },
+    { level: 10, text: "Tomador de Decisión confirma por escrito conclusiones del análisis" }
   ],
   controle: [
-    { level: 0, text: "Nenhum follow documentado de conversa com Pessoa de Contato" },
-    { level: 1, text: "1a visão (SPI) enviada para Pessoa de Contato" },
-    { level: 2, text: "1a visão concordada ou modificada por Pessoa de Contato (SPIN)" },
-    { level: 3, text: "1a visão enviada para Tomador de Decisão (SPI)" },
-    { level: 4, text: "1a visão concordada ou modificada por Tomador de Decisão (SPIN)" },
-    { level: 5, text: "Vendedor recebe aprovação para explorar Valor" },
-    { level: 6, text: "Plano de avaliação enviado para Tomador de Decisão" },
-    { level: 7, text: "Tomador de Decisão concorda ou modifica a Avaliação" },
-    { level: 8, text: "Plano de Avaliação conduzido (quando aplicável)" },
-    { level: 9, text: "Resultado da Avaliação aprovado pelo Tomador de Decisão" },
-    { level: 10, text: "Tomador de Decisão aprova proposta para negociação final" }
+    { level: 0, text: "Ningún seguimiento documentado de conversación con Persona de Contacto" },
+    { level: 1, text: "1ª visión (SPI) enviada para Persona de Contacto" },
+    { level: 2, text: "1ª visión acordada o modificada por Persona de Contacto (SPIN)" },
+    { level: 3, text: "1ª visión enviada para Tomador de Decisión (SPI)" },
+    { level: 4, text: "1ª visión acordada o modificada por Tomador de Decisión (SPIN)" },
+    { level: 5, text: "Vendedor recibe aprobación para explorar Valor" },
+    { level: 6, text: "Plan de evaluación enviado para Tomador de Decisión" },
+    { level: 7, text: "Tomador de Decisión concuerda o modifica la Evaluación" },
+    { level: 8, text: "Plan de Evaluación conducido (cuando aplicable)" },
+    { level: 9, text: "Resultado de la Evaluación aprobado por el Tomador de Decisión" },
+    { level: 10, text: "Tomador de Decisión aprueba propuesta para negociación final" }
   ],
   compras: [
-    { level: 0, text: "Processo de compras desconhecido" },
-    { level: 1, text: "Processo de compras esclarecido pela pessoa de contato" },
-    { level: 2, text: "Processo de compras confirmado pelo Tomador de Decisão" },
-    { level: 3, text: "Condições comerciais validadas com o cliente" },
-    { level: 4, text: "Proposta apresentada para o cliente" },
-    { level: 5, text: "Processo de negociação iniciado com departamento de compras" },
-    { level: 6, text: "Condições comerciais aprovadas e formalizadas" },
-    { level: 7, text: "Contrato assinado" },
-    { level: 8, text: "Pedido de compras recebido" },
-    { level: 9, text: "Cobrança emitida" },
-    { level: 10, text: "Pagamento realizado" }
+    { level: 0, text: "Proceso de compras desconocido" },
+    { level: 1, text: "Proceso de compras aclarado por la persona de contacto" },
+    { level: 2, text: "Proceso de compras confirmado por el Tomador de Decisión" },
+    { level: 3, text: "Condiciones comerciales validadas con el cliente" },
+    { level: 4, text: "Propuesta presentada para el cliente" },
+    { level: 5, text: "Proceso de negociación iniciado con departamento de compras" },
+    { level: 6, text: "Condiciones comerciales aprobadas y formalizadas" },
+    { level: 7, text: "Contrato firmado" },
+    { level: 8, text: "Pedido de compras recibido" },
+    { level: 9, text: "Cobranza emitida" },
+    { level: 10, text: "Pago realizado" }
   ]
 };
 
@@ -636,7 +636,7 @@ const OpportunitiesProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         vendor: formData.vendor || currentUser || 'Tomás',
         value: parseFloat(formData.value.toString()) || 0,
         stage: parseInt(formData.stage?.toString() || '1'),
-        priority: formData.priority || 'média',
+        priority: formData.priority || 'media',
         probability: stages.find(s => s.id === (parseInt(formData.stage?.toString() || '1')))?.probability || 0,
         last_update: new Date().toISOString().split('T')[0],
         scales: safeScales, // Usar las scales seguras
@@ -680,7 +680,7 @@ const OpportunitiesProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         vendor: formData.vendor || currentUser || 'Tomás',
         value: parseFloat(formData.value.toString()) || 0,
         stage: parseInt(formData.stage?.toString() || '1'),
-        priority: formData.priority || 'média',
+        priority: formData.priority || 'media',
         probability: stages.find(s => s.id === (parseInt(formData.stage?.toString() || '1')))?.probability || 0,
         last_update: new Date().toISOString().split('T')[0],
         scales: safeScales, // Usar scales seguras
@@ -994,8 +994,8 @@ const CRMVentapel: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold mb-2">🎯 CRM Ventapel Brasil</h2>
-            <p className="text-blue-100">Sistema de Vendas Consultivas - Metodologia PPVVCC</p>
-            <p className="text-blue-100 text-sm">🔗 Conectado ao Supabase</p>
+            <p className="text-blue-100">Sistema de Ventas Consultivas - Metodología PPVVCC</p>
+            <p className="text-blue-100 text-sm">🔗 Conectado a Supabase</p>
             {currentUser && (
               <p className="text-yellow-300 text-sm mt-1">
                 👤 {currentUser} {currentVendorInfo?.role && `(${currentVendorInfo.role})`}
@@ -1003,10 +1003,10 @@ const CRMVentapel: React.FC = () => {
             )}
           </div>
           <div className="text-right">
-            <div className="text-3xl font-bold">R$ {metrics.totalValue.toLocaleString('pt-BR')}</div>
+            <div className="text-3xl font-bold">R$ {metrics.totalValue.toLocaleString('es-AR')}</div>
             <div className="text-blue-100">Pipeline Total</div>
             <div className="text-lg font-semibold text-yellow-300 mt-1">
-              R$ {metrics.weightedValue.toLocaleString('pt-BR')} ponderado
+              R$ {metrics.weightedValue.toLocaleString('es-AR')} ponderado
             </div>
           </div>
         </div>
@@ -1021,10 +1021,10 @@ const CRMVentapel: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-green-700">Pipeline Total</p>
               <p className="text-2xl font-bold text-green-800">
-                R$ {metrics.totalValue.toLocaleString('pt-BR')}
+                R$ {metrics.totalValue.toLocaleString('es-AR')}
               </p>
               <p className="text-sm text-green-600">
-                Ponderado: R$ {metrics.weightedValue.toLocaleString('pt-BR')}
+                Ponderado: R$ {metrics.weightedValue.toLocaleString('es-AR')}
               </p>
             </div>
           </div>
@@ -1060,7 +1060,7 @@ const CRMVentapel: React.FC = () => {
               <TrendingUp className="w-8 h-8 text-orange-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-orange-700">Prob. Média</p>
+              <p className="text-sm font-medium text-orange-700">Prob. Media</p>
               <p className="text-2xl font-bold text-orange-800">{metrics.avgProbability.toFixed(0)}%</p>
             </div>
           </div>
@@ -1069,7 +1069,7 @@ const CRMVentapel: React.FC = () => {
 
       <div className="bg-white p-8 rounded-xl shadow-sm border">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-semibold text-gray-800">📊 Funil de Vendas</h3>
+          <h3 className="text-xl font-semibold text-gray-800">📊 Embudo de Ventas</h3>
           <div className="flex items-center space-x-4">
             <label className="text-sm font-medium text-gray-700">Filtrar por vendedor:</label>
             <select
@@ -1109,10 +1109,10 @@ const CRMVentapel: React.FC = () => {
                 </div>
                 <div className="w-20 text-sm text-gray-600 text-center">{stage.count}</div>
                 <div className="w-40 text-sm font-medium text-right text-gray-800">
-                  R$ {stage.value.toLocaleString('pt-BR')}
+                  R$ {stage.value.toLocaleString('es-AR')}
                 </div>
                 <div className="w-40 text-sm text-right text-gray-600">
-                  Pond: R$ {stage.weightedValue.toLocaleString('pt-BR')}
+                  Pond: R$ {stage.weightedValue.toLocaleString('es-AR')}
                 </div>
                 <ChevronDown className={'w-5 h-5 ml-4 text-gray-400 transition-transform ' + (selectedStageForList === stage.id ? 'rotate-180' : '')} />
               </div>
@@ -1122,7 +1122,7 @@ const CRMVentapel: React.FC = () => {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="text-left border-b border-gray-200">
-                        <th className="pb-2 font-medium text-gray-700">Oportunidade</th>
+                        <th className="pb-2 font-medium text-gray-700">Oportunidad</th>
                         <th className="pb-2 font-medium text-gray-700">Cliente</th>
                         <th className="pb-2 font-medium text-gray-700">Vendedor</th>
                         <th className="pb-2 font-medium text-gray-700 text-right">Valor</th>
@@ -1137,10 +1137,10 @@ const CRMVentapel: React.FC = () => {
                           <td className="py-2">{opp.name}</td>
                           <td className="py-2">{opp.client}</td>
                           <td className="py-2">{opp.vendor}</td>
-                          <td className="py-2 text-right">R$ {opp.value.toLocaleString('pt-BR')}</td>
+                          <td className="py-2 text-right">R$ {opp.value.toLocaleString('es-AR')}</td>
                           <td className="py-2 text-right">{opp.probability}%</td>
                           <td className="py-2 text-right font-medium">
-                            R$ {(opp.value * opp.probability / 100).toLocaleString('pt-BR')}
+                            R$ {(opp.value * opp.probability / 100).toLocaleString('es-AR')}
                           </td>
                           <td className="py-2">
                             {/* MODIFICACIÓN 6: Agregar botón Brain en la tabla */}
@@ -1181,14 +1181,14 @@ const CRMVentapel: React.FC = () => {
         <div className="mt-6 pt-6 border-t border-gray-200">
           <div className="flex justify-between items-center">
             <div className="text-lg font-semibold text-gray-800">
-              Total Geral:
+              Total General:
             </div>
             <div className="text-right">
               <div className="text-xl font-bold text-gray-900">
-                R$ {metrics.totalValue.toLocaleString('pt-BR')}
+                R$ {metrics.totalValue.toLocaleString('es-AR')}
               </div>
               <div className="text-sm text-gray-600">
-                Ponderado: R$ {metrics.weightedValue.toLocaleString('pt-BR')}
+                Ponderado: R$ {metrics.weightedValue.toLocaleString('es-AR')}
               </div>
             </div>
           </div>
@@ -1227,13 +1227,13 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
               {isInactive30Days && (
                 <span className="px-2 py-1 bg-red-100 text-red-700 text-xs rounded-full flex items-center">
                   <Clock className="w-3 h-3 mr-1" />
-                  +30 dias sem movimento
+                  +30 días sin movimiento
                 </span>
               )} 
               {!isInactive30Days && isInactive7Days && (
                 <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full flex items-center">
                   <Clock className="w-3 h-3 mr-1" />
-                  +7 dias sem movimento
+                  +7 días sin movimiento
                 </span>
               )}
               {/* MODIFICACIÓN 4: Agregar botón Brain en OpportunityCard */}
@@ -1270,34 +1270,34 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                 <p className="text-sm text-gray-600">🏭 {opportunity.industry}</p>
               )}
               {opportunity.expected_close && (
-                <p className="text-sm text-gray-600">📅 Fechamento: {new Date(opportunity.expected_close).toLocaleDateString('pt-BR')}</p>
+                <p className="text-sm text-gray-600">📅 Cierre: {new Date(opportunity.expected_close).toLocaleDateString('es-AR')}</p>
               )}
             </div>
             {opportunity.next_action && (
               <div className="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                <p className="text-sm text-blue-800">📅 <strong>Próxima ação:</strong> {opportunity.next_action}</p>
+                <p className="text-sm text-blue-800">📅 <strong>Próxima acción:</strong> {opportunity.next_action}</p>
               </div>
             )}
             <div className="mt-2 text-xs text-gray-500">
-              Última atualização: {new Date(opportunity.last_update).toLocaleDateString('pt-BR')}
+              Última actualización: {new Date(opportunity.last_update).toLocaleDateString('es-AR')}
             </div>
           </div>
           <div className="text-right">
             <p className="text-2xl font-bold text-green-600 mb-2">
-              R$ {(opportunity.value || 0).toLocaleString('pt-BR')}
+              R$ {(opportunity.value || 0).toLocaleString('es-AR')}
             </p>
             <span className={'inline-block px-4 py-2 rounded-full text-sm font-bold text-white ' + (stage?.color || '') + ' mb-2'}>
               {stage?.name} ({opportunity.probability || 0}%)
             </span>
             <p className="text-sm text-gray-600 font-medium">
-              Ponderado: R$ {((opportunity.value || 0) * (opportunity.probability || 0) / 100).toLocaleString('pt-BR')}
+              Ponderado: R$ {((opportunity.value || 0) * (opportunity.probability || 0) / 100).toLocaleString('es-AR')}
             </p>
           </div>
         </div>
 
         <div className="mb-6 p-4 bg-gray-50 rounded-lg">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="font-semibold text-gray-700">🎯 Gestão de Estágio</h4>
+            <h4 className="font-semibold text-gray-700">🎯 Gestión de Etapa</h4>
             <div className="flex space-x-2">
               {prevStage && (
                 <button
@@ -1339,13 +1339,13 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
         {/* MODIFICACIÓN 5: Agregar indicador visual cuando hay oportunidad seleccionada */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-3">
-            <span className="text-sm font-bold text-gray-700">📊 Score PPVVCC Geral</span>
+            <span className="text-sm font-bold text-gray-700">📊 Score PPVVCC General</span>
             <div className="flex items-center space-x-2">
               <span className="text-lg font-bold text-gray-900">{avgScore.toFixed(1)}/10</span>
               {selectedOpportunity?.id === opportunity.id && (
                 <span className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full flex items-center">
                   <Brain className="w-3 h-3 mr-1" />
-                  Em análise
+                  En análisis
                 </span>
               )}
             </div>
@@ -1386,9 +1386,9 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
           )}
         </div>
 
-        {/* Seção de Contatos */}
+        {/* Sección de Contactos */}
         <div className="border-t pt-4">
-          <h4 className="font-semibold text-gray-700 mb-3">👥 Contatos Principais</h4>
+          <h4 className="font-semibold text-gray-700 mb-3">👥 Contactos Principales</h4>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm">
             {opportunity.power_sponsor && (
               <div className="flex items-center">
@@ -1410,7 +1410,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
             )}
             {opportunity.support_contact && (
               <div className="flex items-center">
-                <span className="font-medium text-gray-600 mr-2">Contato Apoio:</span>
+                <span className="font-medium text-gray-600 mr-2">Contacto Apoyo:</span>
                 <span className="text-gray-800">{opportunity.support_contact}</span>
               </div>
             )}
@@ -1425,14 +1425,14 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
       {error && <ErrorAlert error={error} onClose={() => setError(null)} />}
 
       <div className="bg-white p-6 rounded-xl shadow-sm border">
-        <h3 className="text-lg font-semibold mb-4 text-gray-800">🔍 Filtros e Busca</h3>
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">🔍 Filtros y Búsqueda</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
           <div className="lg:col-span-2">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Buscar por cliente, oportunidade ou produto..."
+                placeholder="Buscar por cliente, oportunidad o producto..."
                 value={filters.searchTerm}
                 onChange={(e) => filters.setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
@@ -1445,7 +1445,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
               onChange={(e) => filters.setFilterStage(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             >
-              <option value="all">📊 Todas as etapas</option>
+              <option value="all">📊 Todas las etapas</option>
               {stages.slice(0, 5).map(stage => (
                 <option key={stage.id} value={stage.id.toString()}>
                   {stage.name} ({stage.probability}%)
@@ -1474,9 +1474,9 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
               onChange={(e) => filters.setFilterInactivity(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             >
-              <option value="all">⏰ Todas atividades</option>
-              <option value="7days">🟡 +7 dias sem movimento</option>
-              <option value="30days">🔴 +30 dias sem movimento</option>
+              <option value="all">⏰ Todas actividades</option>
+              <option value="7days">🟡 +7 días sin movimiento</option>
+              <option value="30days">🔴 +30 días sin movimiento</option>
             </select>
           </div>
           <div>
@@ -1485,7 +1485,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
               className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-lg hover:from-blue-700 hover:to-green-700 font-bold transition-colors"
             >
               <Plus className="w-5 h-5 mr-2" />
-              Nova Oportunidade
+              Nueva Oportunidad
             </button>
           </div>
         </div>
@@ -1501,13 +1501,13 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
           {filteredOpportunities.length === 0 && (
             <div className="text-center py-12 bg-white rounded-xl border">
               <Factory className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhuma oportunidade encontrada</h3>
-              <p className="text-gray-600 mb-6">Ajuste os filtros ou adicione uma nova oportunidade Ventapel</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Ninguna oportunidad encontrada</h3>
+              <p className="text-gray-600 mb-6">Ajuste los filtros o agregue una nueva oportunidad Ventapel</p>
               <button
                 onClick={() => setShowNewOpportunity(true)}
                 className="px-6 py-3 bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-lg hover:from-blue-700 hover:to-green-700 transition-colors font-bold"
               >
-                ➕ Adicionar Oportunidade
+                ➕ Agregar Oportunidad
               </button>
             </div>
           )}
@@ -1529,7 +1529,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
       vendor: opportunity?.vendor || currentUser || vendors[0]?.name || '',
       value: opportunity?.value?.toString() || '',
       stage: opportunity?.stage || 1,
-      priority: opportunity?.priority || 'média',
+      priority: opportunity?.priority || 'media',
       expected_close: opportunity?.expected_close || '',
       next_action: opportunity?.next_action || '',
       product: opportunity?.product || '',
@@ -1620,10 +1620,10 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h2 className="text-3xl font-bold text-gray-900">
-                  {opportunity ? '✏️ Editar Oportunidade' : '➕ Nova Oportunidade'}
+                  {opportunity ? '✏️ Editar Oportunidad' : '➕ Nueva Oportunidad'}
                 </h2>
                 <p className="text-gray-600 mt-1">
-                  {opportunity ? 'Atualize os dados da oportunidade' : 'Adicione uma nova oportunidade ao pipeline Ventapel'}
+                  {opportunity ? 'Actualice los datos de la oportunidad' : 'Agregue una nueva oportunidad al pipeline Ventapel'}
                 </p>
               </div>
               <button 
@@ -1638,16 +1638,16 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-                  <h3 className="text-lg font-semibold mb-4 text-blue-800">📋 Informações Básicas</h3>
+                  <h3 className="text-lg font-semibold mb-4 text-blue-800">📋 Información Básica</h3>
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-700">Nome da Oportunidade *</label>
+                      <label className="block text-sm font-medium mb-2 text-gray-700">Nombre de la Oportunidad *</label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                        placeholder="Ex: Solução de Fechamento Amazon"
+                        placeholder="Ej: Solución de Cierre Amazon"
                         disabled={submitting}
                       />
                     </div>
@@ -1658,7 +1658,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                         value={formData.client}
                         onChange={(e) => setFormData({...formData, client: e.target.value})}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                        placeholder="Nome da empresa"
+                        placeholder="Nombre de la empresa"
                         disabled={submitting}
                       />
                     </div>
@@ -1707,46 +1707,46 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2 text-gray-700">Prioridade</label>
+                        <label className="block text-sm font-medium mb-2 text-gray-700">Prioridad</label>
                         <select
                           value={formData.priority}
                           onChange={(e) => setFormData({...formData, priority: e.target.value})}
                           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                           disabled={submitting}
                         >
-                          <option value="baixa">Baixa</option>
-                          <option value="média">Média</option>
+                          <option value="baja">Baja</option>
+                          <option value="media">Media</option>
                           <option value="alta">Alta</option>
                         </select>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium mb-2 text-gray-700">Produto</label>
+                        <label className="block text-sm font-medium mb-2 text-gray-700">Producto</label>
                         <input
                           type="text"
                           value={formData.product}
                           onChange={(e) => setFormData({...formData, product: e.target.value})}
                           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                          placeholder="Ex: Máquinas BP + Cinta"
+                          placeholder="Ej: Máquinas BP + Cinta"
                           disabled={submitting}
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2 text-gray-700">Indústria</label>
+                        <label className="block text-sm font-medium mb-2 text-gray-700">Industria</label>
                         <input
                           type="text"
                           value={formData.industry}
                           onChange={(e) => setFormData({...formData, industry: e.target.value})}
                           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                          placeholder="Ex: E-commerce, Farmacêutica"
+                          placeholder="Ej: E-commerce, Farmacéutica"
                           disabled={submitting}
                         />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium mb-2 text-gray-700">Fechamento Previsto</label>
+                        <label className="block text-sm font-medium mb-2 text-gray-700">Cierre Previsto</label>
                         <input
                           type="date"
                           value={formData.expected_close}
@@ -1756,13 +1756,13 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2 text-gray-700">Próxima Ação</label>
+                        <label className="block text-sm font-medium mb-2 text-gray-700">Próxima Acción</label>
                         <input
                           type="text"
                           value={formData.next_action}
                           onChange={(e) => setFormData({...formData, next_action: e.target.value})}
                           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                          placeholder="Ex: Demo técnica agendada para 15/02"
+                          placeholder="Ej: Demo técnica agendada para 15/02"
                           disabled={submitting}
                         />
                       </div>
@@ -1771,7 +1771,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                 </div>
 
                 <div className="bg-green-50 rounded-xl p-6 border border-green-200">
-                  <h3 className="text-lg font-semibold mb-4 text-green-800">👥 Contatos Principais</h3>
+                  <h3 className="text-lg font-semibold mb-4 text-green-800">👥 Contactos Principales</h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-700">Power Sponsor</label>
@@ -1780,7 +1780,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                         value={formData.power_sponsor}
                         onChange={(e) => setFormData({...formData, power_sponsor: e.target.value})}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                        placeholder="Quem assina o contrato"
+                        placeholder="Quien firma el contrato"
                         disabled={submitting}
                       />
                     </div>
@@ -1791,7 +1791,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                         value={formData.sponsor}
                         onChange={(e) => setFormData({...formData, sponsor: e.target.value})}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                        placeholder="Decisor usuário"
+                        placeholder="Decisor usuario"
                         disabled={submitting}
                       />
                     </div>
@@ -1802,18 +1802,18 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                         value={formData.influencer}
                         onChange={(e) => setFormData({...formData, influencer: e.target.value})}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                        placeholder="Influencia a decisão"
+                        placeholder="Influye en la decisión"
                         disabled={submitting}
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-700">Contato de Apoio</label>
+                      <label className="block text-sm font-medium mb-2 text-gray-700">Contacto de Apoyo</label>
                       <input
                         type="text"
                         value={formData.support_contact}
                         onChange={(e) => setFormData({...formData, support_contact: e.target.value})}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                        placeholder="Suporte interno"
+                        placeholder="Soporte interno"
                         disabled={submitting}
                       />
                     </div>
@@ -1864,7 +1864,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                                       }}
                                       className="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-lg hover:bg-purple-200 transition-colors flex items-center"
                                     >
-                                      Ver opções de escala
+                                      Ver opciones de escala
                                       {isSelectorOpen ? <ChevronUp className="w-3 h-3 ml-1" /> : <ChevronDown className="w-3 h-3 ml-1" />}
                                     </button>
                                   </div>
@@ -1906,18 +1906,18 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                                   </div>
                                 </div>
                                 <div>
-                                  <label className="block text-sm font-medium mb-2">Observações</label>
+                                  <label className="block text-sm font-medium mb-2">Observaciones</label>
                                   <textarea
                                     value={scaleData.description}
                                     onChange={(e) => updateScale(scale.id, 'description', e.target.value)}
                                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                     rows={3}
-                                    placeholder="Descreva a situação atual..."
+                                    placeholder="Describa la situación actual..."
                                     disabled={submitting}
                                   />
                                 </div>
                                 <div className="bg-white p-3 rounded-lg">
-                                  <p className="text-xs font-medium text-gray-700 mb-2">Perguntas-chave:</p>
+                                  <p className="text-xs font-medium text-gray-700 mb-2">Preguntas clave:</p>
                                   <ul className="text-xs text-gray-600 space-y-1">
                                     {scale.questions?.map((question, idx) => (
                                       <li key={idx} className="flex items-start">
@@ -1954,12 +1954,12 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                 {submitting ? (
                   <React.Fragment>
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Salvando...
+                    Guardando...
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
                     <Save className="w-5 h-5 mr-2" />
-                    {opportunity ? 'Atualizar' : 'Criar'} Oportunidade
+                    {opportunity ? 'Actualizar' : 'Crear'} Oportunidad
                   </React.Fragment>
                 )}
               </button>
@@ -1970,7 +1970,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
     );
   };
 
-  // Componente de Checklist para mudança de estágio
+  // Componente de Checklist para cambio de etapa
   const StageChecklistModal = () => {
     if (!showStageChecklist) return null;
 
@@ -1999,7 +1999,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
 
     const confirmStageChange = async () => {
       if (!allChecked) {
-        alert('Por favor, complete todos os itens do checklist antes de avançar.');
+        alert('Por favor, complete todos los ítems del checklist antes de avanzar.');
         return;
       }
 
@@ -2007,7 +2007,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
         await moveStage(showStageChecklist.opportunity, showStageChecklist.targetStage);
         setShowStageChecklist(null);
       } catch (error) {
-        console.error('Erro ao mover etapa:', error);
+        console.error('Error al mover etapa:', error);
       }
     };
 
@@ -2016,10 +2016,10 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
         <div className="bg-white rounded-xl max-w-2xl w-full">
           <div className="p-6 border-b">
             <h3 className="text-xl font-bold text-gray-900">
-              ✅ Checklist para avançar para {targetStage.name}
+              ✅ Checklist para avanzar a {targetStage.name}
             </h3>
             <p className="text-gray-600 mt-1">
-              Complete todos os itens antes de mover a oportunidade
+              Complete todos los ítems antes de mover la oportunidad
             </p>
           </div>
 
@@ -2054,7 +2054,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
             <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
               <p className="text-sm text-amber-800">
                 <AlertCircle className="inline-block w-4 h-4 mr-1" />
-                <strong>Atenção:</strong> Confirme que todos os requisitos foram cumpridos antes de avançar.
+                <strong>Atención:</strong> Confirme que todos los requisitos fueron cumplidos antes de avanzar.
               </p>
             </div>
           </div>
@@ -2075,7 +2075,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
               disabled={!allChecked}
             >
               <Check className="w-5 h-5 mr-2" />
-              Confirmar e Avançar
+              Confirmar y Avanzar
             </button>
           </div>
         </div>
@@ -2096,7 +2096,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
                   🇧🇷 CRM Ventapel Brasil
                 </h1>
-                <p className="text-sm text-gray-600">Metodologia PPVVCC - Gestão Completa de Oportunidades</p>
+                <p className="text-sm text-gray-600">Metodología PPVVCC - Gestión Completa de Oportunidades</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -2105,7 +2105,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                 onChange={(e) => setCurrentUser(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
-                <option value="">Selecionar vendedor...</option>
+                <option value="">Seleccionar vendedor...</option>
                 {vendors.map(vendor => (
                   <option key={vendor.name} value={vendor.name}>
                     {vendor.name} {vendor.role && `(${vendor.role})`}
@@ -2143,7 +2143,7 @@ const OpportunityCard: React.FC<{ opportunity: Opportunity }> = ({ opportunity }
                   : 'border-transparent text-gray-500 hover:text-gray-700')}
             >
               <Target className="w-4 h-4 mr-2" />
-              🎯 {currentVendorInfo?.is_admin ? 'Todas Oportunidades' : 'Minhas Oportunidades'}
+              🎯 {currentVendorInfo?.is_admin ? 'Todas Oportunidades' : 'Mis Oportunidades'}
             </button>
           </div>
         </div>
