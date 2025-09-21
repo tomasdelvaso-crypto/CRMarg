@@ -2088,7 +2088,7 @@ const CRMVentapel: React.FC = () => {
               </div>
               <div className="ml-4">
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                  🇧🇷 CRM Ventapel Brasil
+                  🇦🇷 CRM Ventapel Argentina
                 </h1>
                 <p className="text-sm text-gray-600">Metodología PPVVCC - Gestión Completa de Oportunidades</p>
               </div>
